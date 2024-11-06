@@ -139,7 +139,8 @@ export default {
       this.initChart();
     },
     initChart() {
-      const radius = Math.min(this.size.width, this.size.height) / 2 - Math.max(this.margin.left, this.margin.right);
+      // Decrease the radius by 20% to make the chart smaller
+      const radius = (Math.min(this.size.width, this.size.height) / 2 - Math.max(this.margin.left, this.margin.right)) * 0.8;
 
       const svg = d3.select("#pie-svg")
         .attr("viewBox", `0 0 ${this.size.width} ${this.size.height}`)
@@ -199,7 +200,7 @@ export default {
 
       // Legend
       const legend = svg.append('g')
-        .attr('transform', `translate(${this.size.width - this.margin.right - 100}, ${this.margin.top})`);
+        .attr('transform', `translate(${this.size.width - this.margin.right - 450}, ${this.margin.top})`);
 
       this.segments.forEach((segment, i) => {
         const legendRow = legend.append('g')
@@ -217,8 +218,7 @@ export default {
           .style('font-size', '12px')
           .text(segment.label);
       });
-    }
-  },
+    }},
   watch: {
     rerender(newSize) {
       if (!isEmpty(newSize)) {
